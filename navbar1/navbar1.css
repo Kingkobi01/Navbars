@@ -1,0 +1,196 @@
+:root {
+    --bg: rgba(0, 214, 170, .85);
+}
+
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background: #222;
+    margin: 0;
+    font-family: Noto Sans Display;
+    font-weight: 400;
+}
+
+
+
+.content {
+    height: 200vh;
+    background-image: url(//unsplash.it/1000/1000);
+    background-color: #333;
+    background-blend-mode: multiply;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+}
+
+/* Navigation styles start here */
+
+
+header {
+    background: var(--bg);
+    text-align: center;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 0 3em rgba(0, 0, 0, .15);
+}
+
+
+
+nav {
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    left: 0;
+    background: var(--bg);
+    width: 100%;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: 400ms ease-in-out;
+
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+nav a {
+    color: white;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+
+}
+
+nav a:hover {
+    color: #000;
+}
+
+
+
+
+.nav-toggle {
+    display: none;
+}
+
+
+
+.nav-toggle:checked~nav {
+    transform: scale(1, 1);
+
+}
+
+.nav-toggle:checked~nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+}
+
+
+.nav-toggle__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-toggle__label span,
+.nav-toggle__label span::after,
+.nav-toggle__label span::before {
+    display: block;
+    background: white;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle__label span::after,
+.nav-toggle__label span::before {
+    content: "";
+    position: absolute;
+}
+
+
+.nav-toggle__label span::before {
+    bottom: 7px;
+}
+
+.nav-toggle__label span::after {
+    top: 7px;
+}
+
+
+@media screen and (min-width: 800px) {
+    .nav-toggle__label {
+        display: none;
+
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 1fr) 1fr;
+    }
+
+    .logo {
+        grid-column: 2/3;
+    }
+
+    nav {
+        all: unset;
+        grid-column: 3/4;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+    }
+
+    nav ul {
+        display: flex;
+    }
+
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+    }
+
+    nav a {
+        opacity: 1;
+    }
+
+    nav a::before {
+        content: "";
+        display: block;
+        height: 5px;
+        background: black;
+        border-radius: 4px;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 250ms ease;
+    }
+
+    nav a:hover::before{
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+}
